@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Este es el archivo de configuración del Contenedor de Inversión de Control (IoC) de Spring.
+  Aquí es donde le decimos a Spring qué objetos (llamados 'beans') debe crear y gestionar.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+      La etiqueta <bean> define un objeto que será gestionado por Spring.
+      - 'id': Es un identificador único para este bean dentro del contenedor. Lo usaremos para solicitar la instancia de este objeto.
+      - 'class': Es el nombre completo de la clase Java que Spring debe instanciar.
+
+      En este caso, le estamos diciendo a Spring: "Crea una instancia de la clase org.example.services.ShopService
+      y regístrala en tu contenedor con el nombre 'shopService'".
+      Spring se encargará de hacer 'new ShopService()' por nosotros.
+    -->
+    <bean id="shopService" class="org.example.services.ShopService" />
+
+
+</beans>

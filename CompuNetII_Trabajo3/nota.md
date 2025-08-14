@@ -1,0 +1,1 @@
+He utilizado una herramienta de inteligencia artificial para generar los comentarios en este código. El objetivo es que sirvan como apuntes personales y para facilitar la comprensión de la estructura y lógica del proyecto.
