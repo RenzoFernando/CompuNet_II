@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Este archivo de configuración de Spring ahora muestra un concepto clave: la Inyección de Dependencias (Dependency Injection).
+  Spring no solo crea los objetos (beans), sino que también los "conecta" (wiring) entre sí.
+-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!-- BEANS DE SERVICIO -->
+    <!-- Definimos el bean 'courseService'. -->
+    <bean id="courseService" class="org.example.service.CourseService">
+        <!--
+          La etiqueta <constructor-arg> le dice a Spring que use el constructor de la clase para inyectar dependencias.
+          'ref' se refiere al 'id' de otro bean definido en este archivo.
+          Aquí, Spring buscará los beans con id 'courseRepository' y 'studentRepository' y los pasará como argumentos
+          al constructor de CourseService. Esto es la "Inyección de Dependencias por Constructor".
+        -->
+        <constructor-arg ref="courseRepository"/>
+        <constructor-arg ref="studentRepository"/>
+    </bean>
+
+    <!-- Definimos el bean 'studentService' de manera similar. -->
+    <bean id="studentService" class="org.example.service.StudentService">
+        <!--
+          Spring es lo suficientemente inteligente como para hacer coincidir los 'ref' con los tipos de los argumentos del constructor,
+          así que el orden aquí no es estrictamente necesario si los tipos son diferentes.
+          Sin embargo, es una buena práctica mantener el orden para mayor claridad.
+          Aquí se inyectan 'studentRepository' y 'courseService' (¡un servicio dependiendo de otro!).
+        -->
+        <constructor-arg ref="studentRepository" />
+        <constructor-arg ref="courseService" />
+    </bean>
+
+    <!-- BEANS DE REPOSITORIO -->
+    <!--
+      Definimos los beans para la capa de Repositorio.
+      Estos son beans simples, sin dependencias, por lo que no necesitan <constructor-arg>.
+      Spring simplemente llamará a su constructor por defecto.
+    -->
+    <bean id="courseRepository" class="org.example.repository.CourseRepository" />
+    <bean id="studentRepository" class="org.example.repository.StudentRepository" />
+
+
+</beans>
