@@ -39,8 +39,12 @@
       Estos son beans simples, sin dependencias, por lo que no necesitan <constructor-arg>.
       Spring simplemente llamará a su constructor por defecto.
     -->
-    <bean id="courseRepository" class="org.example.repository.CourseRepository" />
-    <bean id="studentRepository" class="org.example.repository.StudentRepository" />
+    <bean id="courseRepository"
+          class="org.example.repository.CourseRepository"
+          />
 
+    <bean id="studentRepository"
+          class="org.example.repository.StudentRepository"
+          init-method="initReo"/>
 
 </beans>

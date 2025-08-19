@@ -11,6 +11,30 @@
     <!-- Enlazamos la hoja de estilos externa -->
     <link rel="stylesheet" href="style.css">
 </head>
+
+<%--
+
+<!-- CODIGO HECHO EN CLASE -->
+
+<body>
+
+    <H1>Escriba</H1>
+    <p>Escriba quí.</p>
+    <%
+        StudentService studentService = AppContext.getInstance()
+                .getBean("studentService", StudentService.class);
+
+        for(Student student : studentService.getStudents()) {
+            out.println("<p>" + student.getName() + " (ID: " + student.getId() + ") - " + student.getCourseId() + "</p>");
+        }
+    %>
+
+
+
+</body>
+--%>
+
+<!-- MI CODIGO A MI FORMA -->
 <body>
 <div class="container">
     <h1>Gestión de Estudiantes</h1>

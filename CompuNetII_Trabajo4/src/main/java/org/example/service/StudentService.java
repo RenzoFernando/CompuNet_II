@@ -22,6 +22,7 @@ public class StudentService {
         this.courseService = courseService;
     }
 
+
     /**
      * Añade un estudiante, aplicando una regla de negocio.
      * @param student El estudiante a añadir.
@@ -38,6 +39,17 @@ public class StudentService {
             studentRepository.addStudent(student);
             System.out.println("Estudiante agregado: " + student.getName());
         }
+    }
+
+    /**
+     * Obtiene una lista de estudiantes filtrada por curso.
+     * Este método es un ejemplo de cómo un servicio puede interactuar con otro servicio.
+     * En una aplicación real, aquí podrías aplicar más lógica de negocio.
+     * @param courseId
+     * @return
+     */
+    public ArrayList<Student> getStudentsByCourse(String courseId) {
+        return studentRepository.getStudents();
     }
 
     /**
