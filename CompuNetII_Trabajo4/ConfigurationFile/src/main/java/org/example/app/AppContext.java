@@ -1,30 +1,32 @@
 package org.example.app;
 
+import org.example.config.AppConfig;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
- * Esta clase, al igual que en el proyecto anterior, utiliza el patrón Singleton
- * para gestionar y proporcionar una única instancia del ApplicationContext de Spring.
- * Es el puente entre nuestro código de aplicación y el contenedor de IoC de Spring.
+ * El AppContext ahora está adaptado para leer la configuración desde una clase Java.
  */
 public class AppContext {
 
-    // Se crea una única instancia estática del ApplicationContext de Spring.
-    // ClassPathXmlApplicationContext le indica a Spring que busque y cargue el archivo 'context.xml'
-    // desde el classpath de la aplicación al iniciarse.
-    private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
+    /**
+     * ¡Este es el cambio clave!
+     * En lugar de 'ClassPathXmlApplicationContext' que busca un archivo .xml,
+     * ahora usamos 'AnnotationConfigApplicationContext'.
+     * Le pasamos la clase 'AppConfig.class' como argumento para que sepa dónde
+     * buscar las definiciones de los beans (@Bean).
+     */
+    private static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(AppConfig.class);
 
     /**
-     * Constructor privado para evitar que se creen otras instancias de esta clase.
+     * Constructor privado para mantener el patrón Singleton.
      */
     private AppContext(){}
 
     /**
-     * Método estático público que permite a cualquier parte de la aplicación
-     * obtener acceso al contenedor de Spring para solicitar los beans que necesite.
-     * @return La instancia única del ApplicationContext.
+     * Método estático para obtener la instancia del contenedor de Spring.
+     * Su funcionamiento no cambia para el resto de la aplicación.
      */
     public static ApplicationContext getInstance(){
         return applicationContext;

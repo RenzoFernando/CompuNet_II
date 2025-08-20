@@ -12,42 +12,38 @@ import org.example.service.StudentService;
 
 import java.io.IOException;
 
-/**
- * Servlet para manejar las peticiones relacionadas con los Estudiantes.
- */
 @WebServlet("/student")
 public class StudentServlet extends HttpServlet {
 
-    // El servlet depende del servicio, no del repositorio directamente.
     private StudentService studentService;
 
+    /**
+     * El método init se ejecuta una vez al iniciar el servlet.
+     * Aquí obtenemos la instancia del 'studentService' del contenedor de Spring,
+     * que ahora está configurado a través de la clase AppConfig.
+     */
     @Override
     public void init(ServletConfig config) throws ServletException {
-        // Aquí se debería obtener el bean 'studentService'.
-        // La línea actual obtiene el repositorio pero no lo asigna a ninguna variable de la clase.
-        // Probablemente sea un paso intermedio en la construcción del código.
-        // La forma correcta sería:
-        // this.studentService = AppContext.getInstance().getBean("studentService", StudentService.class);
-        this.studentService = AppContext.getInstance().getBean("studentService", StudentService.class);
+        studentService = AppContext.getInstance().getBean("studentService", StudentService.class);
     }
 
     /**
-     * Maneja las peticiones POST, que típicamente vienen de un formulario HTML.
+     * Maneja las peticiones POST del formulario para crear un nuevo estudiante.
      */
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // 1. parámetros del formulario (los 'name' del HTML)
+        // 1. Leer los parámetros del formulario.
         String id = req.getParameter("studentId");
         String name = req.getParameter("studentName");
         String courseId = req.getParameter("courseId");
 
-        // 2. objeto Student con los datos del formulario
+        // 2. Crear el objeto Student.
         Student newStudent = new Student(id, name, courseId);
 
-        // 3. servicio para agregar el estudiante
+        // 3. Usar el servicio para aplicar la lógica de negocio.
         studentService.addStudent(newStudent);
 
-        // 4. Redirigir al usuario a la página principal para ver los cambios
-        resp.sendRedirect("./"); // El './' lleva al index.jsp
+        // 4. Redirigir al usuario a la página principal.
+        resp.sendRedirect("./");
     }
 }
