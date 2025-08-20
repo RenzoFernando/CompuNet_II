@@ -1,33 +1,24 @@
 package org.example.app;
 
+import org.example.config.AppConfig; // Importamos la nueva clase de configuración
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-
-/**
- * Esta clase, al igual que en el proyecto anterior, utiliza el patrón Singleton
- * para gestionar y proporcionar una única instancia del ApplicationContext de Spring.
- * Es el puente entre nuestro código de aplicación y el contenedor de IoC de Spring.
- */
 public class AppContext {
 
-    // Se crea una única instancia estática del ApplicationContext de Spring.
-    // ClassPathXmlApplicationContext le indica a Spring que busque y cargue el archivo 'context.xml'
-    // desde el classpath de la aplicación al iniciarse.
-    private static ApplicationContext applicationContext = new ClassPathXmlApplicationContext("context.xml");
-
     /**
-     * Constructor privado para evitar que se creen otras instancias de esta clase.
+     * !!! AQUI!!!
+     * En lugar de pasar el nombre del paquete para que lo escanee, ahora le pasamos
+     * la clase de configuración 'AppConfig.class'. Spring leerá las anotaciones
+     * (@ComponentScan) de esa clase para saber qué hacer.
      */
+    private static ApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(AppConfig.class);
+
+
     private AppContext(){}
 
-    /**
-     * Método estático público que permite a cualquier parte de la aplicación
-     * obtener acceso al contenedor de Spring para solicitar los beans que necesite.
-     * @return La instancia única del ApplicationContext.
-     */
     public static ApplicationContext getInstance(){
         return applicationContext;
     }
-
 }

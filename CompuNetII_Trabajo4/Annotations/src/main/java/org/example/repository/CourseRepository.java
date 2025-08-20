@@ -1,30 +1,32 @@
 package org.example.repository;
 
 import org.example.model.Course;
-
+import org.springframework.stereotype.Repository; // Importación necesaria
 import java.util.ArrayList;
 
 /**
- * Esta es la capa de Repositorio (Repository Layer) para los Cursos.
- * Su única responsabilidad es interactuar con la fuente de datos.
- * En este ejemplo, la "fuente de datos" es una simple lista en memoria (ArrayList).
- * En una aplicación real, aquí estaría el código para conectar y consultar una base de datos (JDBC, JPA, etc.).
+ * Marcamos esta clase con @Repository para que el Component Scan de Spring
+ * la detecte y la registre como un bean en el contenedor.
  */
+@Repository
 public class CourseRepository {
-    // Simula una tabla de base de datos de cursos.
+
+    /**
+     * Lista que almacena los cursos.
+     */
     private ArrayList<Course> courses = new ArrayList<>();
 
     /**
-     * Devuelve todos los cursos almacenados.
-     * @return La lista de cursos.
+     * Método para obtener la lista de cursos.
+     * @return Lista de cursos.
      */
     public ArrayList<Course> getCourses() {
         return courses;
     }
 
     /**
-     * Añade un nuevo curso a la fuente de datos.
-     * @param course El objeto Course a guardar.
+     * Método para agregar un curso al repositorio.
+     * @param course El curso a agregar.
      */
     public void addCourse(Course course) {
         courses.add(course);

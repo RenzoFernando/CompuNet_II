@@ -1,45 +1,48 @@
 package org.example.repository;
 
+import jakarta.annotation.PostConstruct; // Importación necesaria
 import org.example.model.Student;
-
+import org.springframework.stereotype.Repository; // Importación necesaria
 import java.util.ArrayList;
 
 /**
- * La capa de Repositorio para los Estudiantes.
- * Gestiona el acceso a los datos de los estudiantes.
+ * @Repository es una especialización de @Component. Le indica a Spring que esta clase
+ * es un "Repositorio", es decir, una clase de acceso a datos. Spring la registrará como un bean.
  */
+@Repository
 public class StudentRepository {
 
-    // Simula una tabla de base de datos de estudiantes.
+    /**
+     * Lista que almacena los estudiantes.
+     */
     private ArrayList<Student> students = new ArrayList<>();
 
     /**
-     * Devuelve todos los estudiantes almacenados.
-     * @return La lista de estudiantes.
+     * Método para obtener la lista de estudiantes.
+     * @return Lista de estudiantes.
      */
     public ArrayList<Student> getStudents() {
         return students;
     }
 
     /**
-     * Añade un nuevo estudiante a la fuente de datos.
-     * @param student El objeto Student a guardar.
+     * Método para agregar un estudiante al repositorio.
+     * @param student El estudiante a agregar.
      */
     public void addStudent(Student student) {
         students.add(student);
     }
 
     /**
-     * Inicializa el repositorio con algunos datos de prueba.
-     * Este método es un ejemplo de cómo podrías poblar el repositorio con datos inicial
+     * @PostConstruct es una anotación que le dice a Spring: "después de que hayas construido
+     * este objeto y realizado todas las inyecciones, ejecuta este método".
+     * Es el equivalente en anotaciones al 'init-method' del XML.
      */
-    public void initReo(){
-        // Este método es un ejemplo de inicialización del repositorio.
-        // Aquí podrías agregar estudiantes de prueba o realizar alguna configuración inicial.
+    @PostConstruct
+    public void initRepo(){
         students.add(new Student("1", "Luna", "101"));
         students.add(new Student("2", "Guz", "102"));
         students.add(new Student("3", "Renzo", "103"));
-        System.out.println("StudentRepository initialized with sample data.");
+        System.out.println("StudentRepository inicializado con datos de ejemplo vía @PostConstruct.");
     }
-
 }

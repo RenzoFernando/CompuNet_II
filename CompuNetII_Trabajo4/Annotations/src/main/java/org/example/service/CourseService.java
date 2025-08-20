@@ -2,27 +2,25 @@ package org.example.service;
 
 import org.example.repository.CourseRepository;
 import org.example.repository.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
- * Esta es la capa de Servicio (Service Layer) para los Cursos.
- * Orquesta las operaciones y contiene la lógica de negocio relacionada con los cursos.
+ * Marcamos esta clase como un @Service para que Spring la gestione.
  */
+@Service
 public class CourseService {
 
-    // Dependencias hacia la capa de repositorio. El servicio NO accede a los datos directamente.
-    private CourseRepository courseRepository;
-    private StudentRepository studentRepository;
+    private final CourseRepository courseRepository;
+    private final StudentRepository studentRepository;
 
     /**
-     * Constructor utilizado por Spring para la Inyección de Dependencias.
-     * Cuando Spring crea el bean 'courseService', le pasará las instancias de 'courseRepository'
-     * y 'studentRepository' que también ha creado.
-     * La clase no crea sus propias dependencias (new CourseRepository()), sino que las recibe.
+     * Usamos la inyección por constructor, que es la práctica recomendada.
+     * Spring buscará los beans de repositorios y los inyectará aquí al crear el CourseService.
      */
+    @Autowired
     public CourseService(CourseRepository courseRepository, StudentRepository studentRepository) {
         this.courseRepository = courseRepository;
         this.studentRepository = studentRepository;
     }
-
-
 }
