@@ -1,29 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Este es el archivo pom.xml para el Trabajo 4 - Annotations.
-  Al igual que en el proyecto anterior, define las dependencias y la configuración de construcción del proyecto Maven.
+  Este es el archivo pom.xml para el Trabajo 4 - Versión "Annotations".
+  Las dependencias son las mismas, ya que Spring Context maneja tanto la configuración
+  XML como la basada en anotaciones.
 -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <!-- El empaquetado sigue siendo 'war' para una aplicación web. -->
     <packaging>war</packaging>
 
-    <!-- Las coordenadas del proyecto ahora reflejan que es el Trabajo 4 - Annotations. -->
+    <!-- El artifactId identifica esta versión específica del proyecto. -->
     <groupId>org.example</groupId>
     <artifactId>Annotations</artifactId>
     <version>1.0-SNAPSHOT</version>
 
-    <!-- Las dependencias son las mismas: Spring Context para el contenedor de IoC y la API de Servlets de Jakarta. -->
     <dependencies>
+        <!-- Dependencia principal de Spring para el Contenedor de IoC. -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
             <version>6.2.2</version>
         </dependency>
 
+        <!-- API de Servlets, provista por el servidor (Tomcat). -->
         <dependency>
             <groupId>jakarta.servlet</groupId>
             <artifactId>jakarta.servlet-api</artifactId>
@@ -33,7 +34,6 @@
 
     </dependencies>
 
-    <!-- Las propiedades de compilación no han cambiado. -->
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>

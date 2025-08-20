@@ -33,7 +33,7 @@ public class StudentRepository {
      * Inicializa el repositorio con algunos datos de prueba.
      * Este método es un ejemplo de cómo podrías poblar el repositorio con datos inicial
      */
-    public void initReo(){
+    public void initRepo(){
         // Este método es un ejemplo de inicialización del repositorio.
         // Aquí podrías agregar estudiantes de prueba o realizar alguna configuración inicial.
         students.add(new Student("1", "Luna", "101"));

@@ -1,8 +1,8 @@
 package org.example.service;
 
 import org.example.model.Student;
+import org.example.repository.CourseRepository;
 import org.example.repository.StudentRepository;
-
 import java.util.ArrayList;
 
 /**
@@ -10,56 +10,49 @@ import java.util.ArrayList;
  */
 public class StudentService {
 
-    // Dependencias hacia el repositorio de estudiantes y el servicio de cursos.
     private StudentRepository studentRepository;
-    private CourseService courseService; // Un servicio puede depender de otro servicio.
+    private CourseRepository courseRepository; // Dependencia directa al repositorio de cursos.
 
     /**
-     * Constructor para la Inyección de Dependencias de Spring.
+     * CORRECCIÓN LÓGICA:
+     * El constructor ahora recibe los dos repositorios que este servicio necesita para operar,
+     * en lugar de depender de otro servicio (CourseService). Esto hace que la clase sea más cohesiva.
      */
-    public StudentService(StudentRepository studentRepository, CourseService courseService) {
+    public StudentService(StudentRepository studentRepository, CourseRepository courseRepository) {
         this.studentRepository = studentRepository;
-        this.courseService = courseService;
+        this.courseRepository = courseRepository;
     }
 
-
     /**
-     * Añade un estudiante, aplicando una regla de negocio.
+     * Añade un estudiante, aplicando la regla de negocio para evitar duplicados.
      * @param student El estudiante a añadir.
      */
     public void addStudent(Student student) {
-        // --- INICIO DE LA LÓGICA DE NEGOCIO ---
-        // Regla: no se permiten estudiantes duplicados.
-        // Gracias al método equals() que sobrescribimos en la clase Student,
-        // .contains() buscará un estudiante con el mismo ID.
         if(studentRepository.getStudents().contains(student)){
             System.out.println("El estudiante ya existe");
         } else {
-            // Si no existe, delega la acción de guardado a la capa de repositorio.
             studentRepository.addStudent(student);
+            // Se asume que la clase Student tiene un método getName()
             System.out.println("Estudiante agregado: " + student.getName());
         }
     }
 
     /**
-     * Obtiene una lista de estudiantes filtrada por curso.
-     * Este método es un ejemplo de cómo un servicio puede interactuar con otro servicio.
-     * En una aplicación real, aquí podrías aplicar más lógica de negocio.
-     * @param courseId
-     * @return
+     * Obtiene una lista de estudiantes. En una futura implementación,
+     * podría usar el 'courseRepository' para filtrar los estudiantes por el ID del curso.
+     * @param courseId El ID del curso por el cual filtrar.
+     * @return Una lista de estudiantes.
      */
     public ArrayList<Student> getStudentsByCourse(String courseId) {
+        // TODO: Implementar la lógica para filtrar estudiantes usando el courseId.
         return studentRepository.getStudents();
     }
 
     /**
-     * El servicio le pide los datos al repositorio y los devuelve.
-     * Así, el JSP no necesita saber nada sobre el repositorio.
+     * Devuelve la lista completa de todos los estudiantes.
      * @return una lista de todos los estudiantes.
      */
     public ArrayList<Student> getStudents() {
         return studentRepository.getStudents();
     }
-
-
 }
