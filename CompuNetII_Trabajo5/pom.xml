@@ -1,133 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-    Esta es la declaración XML estándar que especifica la versión y la codificación del archivo.
--->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <!--
-        Define la versión del modelo POM, que siempre debe ser 4.0.0 para los proyectos modernos.
-    -->
     <modelVersion>4.0.0</modelVersion>
-    <!--
-        Esta sección hereda las configuraciones de un proyecto padre. En este caso, hereda del
-        "spring-boot-starter-parent", lo que proporciona configuraciones predeterminadas
-        útiles para proyectos de Spring Boot, como la gestión de versiones de dependencias.
-    -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>3.5.5</version>
-        <relativePath/> <!-- Busca el POM padre en el repositorio -->
+        <version>3.2.5</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <!--
-        Esta sección define la información de identificación de este proyecto.
-    -->
     <groupId>co.edu.icesi</groupId>
     <artifactId>CompuNetII_Trabajo5</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <!--
-        Define el tipo de paquete que se creará, en este caso, un "war" (Web Application Archive),
-        que es un formato común para aplicaciones web Java que se despliegan en servidores como Tomcat.
-    -->
     <packaging>war</packaging>
-    <!--
-        Proporciona un nombre legible y una descripción del proyecto.
-    -->
-    <name>Trabajo5</name>
-    <description>Trabajo5</description>
-    <url/>
-    <licenses>
-        <license/>
-    </licenses>
-    <developers>
-        <developer/>
-    </developers>
-    <scm>
-        <connection/>
-        <developerConnection/>
-        <tag/>
-        <url/>
-    </scm>
-    <!--
-        Esta sección define propiedades globales que se pueden reutilizar en todo el archivo.
-        Aquí se especifica la versión de Java que se utilizará para compilar el proyecto.
-    -->
+    <name>CompuNetII_Trabajo5</name>
+    <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>21</java.version>
     </properties>
-    <!--
-        Esta es la sección más importante, donde se declaran las dependencias (librerías)
-        que necesita el proyecto para funcionar.
-    -->
     <dependencies>
-        <!--
-            Esta es la dependencia principal de Spring Boot para crear aplicaciones web.
-            Incluye un servidor web embebido y otras librerías esenciales para el desarrollo web.
-        -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>runtime</scope>
+        </dependency>
 
-        <!--
-            Esta dependencia es para Tomcat, el servidor web. El "scope provided" significa
-            que se espera que el servidor de aplicaciones (como Tomcat en un entorno de producción)
-            ya la proporcione, por lo que no se incluirá en el archivo WAR final.
-        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
             <scope>provided</scope>
         </dependency>
-        <!--
-            Esta dependencia es para las pruebas de la aplicación (JUnit, Mockito, etc.).
-            El "scope test" significa que solo se utilizará durante la fase de pruebas y
-            no se incluirá en el paquete final.
-        -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
-
-        <!--
-            Esta dependencia es el "starter" para Spring Data JPA, que facilita la
-            gestión de bases de datos relacionales con el uso de entidades y repositorios.
-        -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <!--
-            Esta es la dependencia para la base de datos H2. H2 es una base de datos en memoria,
-            muy útil para el desarrollo y las pruebas, ya que no requiere instalación y se
-            crea y destruye con la aplicación.
-            El "scope runtime" indica que esta dependencia solo es necesaria en tiempo de
-            ejecución y no para la compilación.
-        -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
-            <scope>runtime</scope>
+            <scope>test</scope>
         </dependency>
-
     </dependencies>
 
-    <!--
-        La sección "build" configura el proceso de construcción del proyecto.
-    -->
     <build>
         <plugins>
-            <!--
-                Este es el plugin de Spring Boot Maven, que permite empaquetar
-                la aplicación como un archivo ejecutable (WAR o JAR) y facilita la ejecución.
-            -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>21</release>
+                </configuration>
             </plugin>
         </plugins>
     </build>
 
 </project>
+

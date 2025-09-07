@@ -1,0 +1,48 @@
+# Este archivo contiene las propiedades de configuraci\u00F3n para la aplicaci\u00F3n Spring Boot.
+# Spring Boot lee este archivo autom\u00E1ticamente al arrancar.
+
+# Nombre de la aplicaci\u00F3n.
+spring.application.name=IntroSpringboot
+
+# --- CONFIGURACI\u00D3N DE JPA E HIBERNATE ---
+# 'spring.jpa.hibernate.ddl-auto' controla c\u00F3mo Hibernate gestiona el esquema de la base de datos.
+# 'update': Hibernate intentar\u00E1 actualizar el esquema de la base de datos para que coincida con las entidades.
+# Si la tabla no existe, la crea. Si hay cambios en las entidades, intenta a\u00F1adir columnas.
+# Otros valores comunes son 'create' (borra y crea todo al inicio), 'create-drop' (como create, pero borra todo al final),
+# y 'validate' (valida que el esquema coincida, pero no hace cambios). 'none' es la opci\u00F3n recomendada para producci\u00F3n.
+spring.jpa.hibernate.ddl-auto=update
+
+# --- CONFIGURACI\u00D3N DE LA BASE DE DATOS (ACTUALMENTE H2) ---
+# NOTA: Toda esta secci\u00F3n ser\u00E1 modificada para conectarnos a la base de datos PostgreSQL de Docker.
+
+# 'driver-class-name': Especifica la clase del driver JDBC para la base de datos.
+spring.datasource.driver-class-name=org.h2.Driver
+
+# 'url': La cadena de conexi\u00F3n JDBC. 'jdbc:h2:mem:testdb' significa que estamos usando
+# una base de datos H2 en memoria llamada 'testdb'. Los datos se perder\u00E1n cuando la aplicaci\u00F3n se detenga.
+spring.datasource.url=jdbc:h2:mem:testdb
+
+# Credenciales para la base de datos H2.
+spring.datasource.username=sa
+spring.datasource.password=
+
+# 'database-platform': Especifica el "dialecto" de SQL que Hibernate debe usar.
+# Cada base de datos (H2, PostgreSQL, MySQL) tiene sus propias particularidades de SQL.
+spring.jpa.database-platform=org.hibernate.dialect.H2Dialect
+
+# Habilita la consola web de H2, muy \u00FAtil para inspeccionar la base de datos en memoria durante el desarrollo.
+spring.h2.console.enabled=true
+# Define la ruta para acceder a la consola H2 (ej: http://localhost:8080/h2).
+spring.h2.console.path=/h2
+
+
+# --- OTRAS CONFIGURACIONES DE JPA Y SQL ---
+
+# 'defer-datasource-initialization': Cuando se establece en 'true', Spring pospone la inicializaci\u00F3n
+# de la base de datos (ejecuci\u00F3n de data.sql) hasta despu\u00E9s de que Hibernate haya creado el esquema (ddl-auto).
+# Esto es necesario para que data.sql pueda insertar datos en las tablas que Hibernate acaba de crear.
+spring.jpa.defer-datasource-initialization=true
+
+# 'show-sql': Si es 'true', Hibernate imprimir\u00E1 en la consola todas las sentencias SQL que ejecuta.
+# Es extremadamente \u00FAtil para depurar y entender qu\u00E9 est\u00E1 haciendo JPA por debajo.
+spring.jpa.show-sql=true

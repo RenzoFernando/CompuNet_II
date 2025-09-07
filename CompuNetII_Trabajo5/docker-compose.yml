@@ -1,0 +1,34 @@
+# Este archivo utiliza Docker Compose para definir y ejecutar la base de datos PostgreSQL.
+# Docker nos permite tener un entorno de base de datos consistente y aislado,
+# sin necesidad de instalar Postgres directamente en nuestra máquina.
+
+services:
+  # Define un servicio (un contenedor) que llamaremos 'db'.
+  db:
+    # Especifica la imagen de Docker que se usará. En este caso, es la versión 17 oficial de Postgres.
+    image: postgres:17
+    # 'restart: always' asegura que si el contenedor se detiene por alguna razón, Docker intentará reiniciarlo automáticamente.
+    restart: always
+    # 'environment' establece las variables de entorno dentro del contenedor. Son cruciales para la configuración inicial de Postgres.
+    environment:
+      POSTGRES_DB: 'db'          # Nombre de la base de datos que se creará al iniciar.
+      POSTGRES_USER: 'user'      # Nombre de usuario para conectarse a la base de datos.
+      POSTGRES_PASSWORD: 'password' # Contraseña para ese usuario.
+    # 'ports' mapea un puerto de tu máquina (host) a un puerto dentro del contenedor.
+    ports:
+      # Mapea el puerto 5433 de tu máquina al puerto 5432 del contenedor, que es el puerto por defecto de Postgres.
+      # Esto nos permite conectar nuestra aplicación Spring Boot a la base de datos como si estuviera corriendo localmente.
+      - '5433:5432'
+    # 'expose' es una forma de documentar qué puertos expone el contenedor, aunque 'ports' ya lo hace accesible.
+    expose:
+      - '5432'
+    # 'volumes' se usa para persistir los datos de la base de datos.
+    volumes:
+      # Mapea un volumen nombrado 'my-volume' a la carpeta donde Postgres guarda sus datos dentro del contenedor.
+      # Esto es VITAL: sin esto, todos los datos se perderían cada vez que el contenedor se detenga o reinicie.
+      - my-volume:/var/lib/postgresql/data
+
+# 'volumes' en el nivel superior declara los volúmenes nombrados que usamos en los servicios.
+volumes:
+  my-volume:
+  # Al dejarlo vacío, Docker gestiona el volumen por nosotros.
