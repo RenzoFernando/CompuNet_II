@@ -2,18 +2,18 @@ package co.edu.icesi.CompuNetII_Trabajo5.service.impl;
 
 import jakarta.transaction.Transactional;
 import co.edu.icesi.CompuNetII_Trabajo5.entity.Account;
-import co.edu.icesi.CompuNetII_Trabajo5.repository.AccountRepository;
-import co.edu.icesi.CompuNetII_Trabajo5.service.AccountService;
+import co.edu.icesi.CompuNetII_Trabajo5.repository.IAccountRepository;
+import co.edu.icesi.CompuNetII_Trabajo5.service.IAccountService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 // Marca esta clase como un componente de servicio gestionado por Spring.
 @Service
-public class AccountServiceImpl implements AccountService {
+public class AccountServiceImpl implements IAccountService {
 
     // Inyecta el repositorio de cuentas para poder interactuar con la base de datos.
     @Autowired
-    private AccountRepository accountRepository;
+    private IAccountRepository accountRepository;
 
     /**
      * Implementación de la lógica para transferir dinero.

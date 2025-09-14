@@ -2,7 +2,7 @@ package co.edu.icesi.CompuNetII_Trabajo5.service;
 
 // La interfaz para el servicio de gestión de cuentas bancarias.
 // Define el contrato para las operaciones de negocio relacionadas con las cuentas.
-public interface AccountService {
+public interface IAccountService {
 
     /**
      * Define la operación de negocio para transferir dinero entre dos cuentas.

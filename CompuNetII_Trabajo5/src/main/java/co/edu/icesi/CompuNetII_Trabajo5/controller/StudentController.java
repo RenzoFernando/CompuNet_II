@@ -1,9 +1,9 @@
 package co.edu.icesi.CompuNetII_Trabajo5.controller;
 
 import co.edu.icesi.CompuNetII_Trabajo5.entity.Student;
-import co.edu.icesi.CompuNetII_Trabajo5.repository.StudentRepository;
-import co.edu.icesi.CompuNetII_Trabajo5.service.AccountService;
-import co.edu.icesi.CompuNetII_Trabajo5.service.StudentService;
+import co.edu.icesi.CompuNetII_Trabajo5.repository.IStudentRepository;
+import co.edu.icesi.CompuNetII_Trabajo5.service.IAccountService;
+import co.edu.icesi.CompuNetII_Trabajo5.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,17 +23,17 @@ public class StudentController {
     // tener múltiples implementaciones en el futuro (por ejemplo, una que lea de un archivo CSV).
     // El nombre "studentServiceImpl" corresponde al nombre del bean que Spring creó para nuestra clase de servicio.
     @Qualifier("studentServiceImpl")
-    private StudentService studentService;
+    private IStudentService studentService;
 
     // Inyectamos la interfaz del servicio de cuentas. Spring buscará la clase que la implementa (@Service) y la proporcionará.
     @Autowired
-    private AccountService accountService;
+    private IAccountService accountService;
 
     // También estamos inyectando el repositorio directamente. Aunque es posible, generalmente
     // se considera mejor práctica que el controlador solo hable con la capa de servicio
     // para mantener una separación clara de responsabilidades.
     @Autowired
-    private StudentRepository studentRepository;
+    private IStudentRepository studentRepository;
 
 
     // --- ENDPOINTS (Puntos de Acceso a la API) ---

@@ -1,7 +1,7 @@
 package co.edu.icesi.CompuNetII_Trabajo5.controller;
 
 import co.edu.icesi.CompuNetII_Trabajo5.entity.Professor;
-import co.edu.icesi.CompuNetII_Trabajo5.service.ProfessorService;
+import co.edu.icesi.CompuNetII_Trabajo5.service.IProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import java.util.List;
 public class PruebaDockerController {
 
     @Autowired
-    private ProfessorService professorService;
+    private IProfessorService professorService;
 
     // --- Endpoint de prueba para verificar la conexión con PostgreSQL ---
     /**

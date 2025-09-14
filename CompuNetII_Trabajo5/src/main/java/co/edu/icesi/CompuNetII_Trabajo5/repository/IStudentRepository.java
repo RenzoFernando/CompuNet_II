@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 // Repositorio para la entidad Student.
-public interface StudentRepository extends JpaRepository<Student, Integer> {
+public interface IStudentRepository extends JpaRepository<Student, Integer> {
 
     // --- Ejer 1 ---
     Optional<Student> findByCode(String code);
@@ -21,4 +21,7 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
     // --- Ejer 9 ---
     List<Student> findByStudentCourses_Course_Professor_Name(String professorName);
 
+    // --- Semana 7 --- //
+
+    List<Student> findByStudentCourses_Course_Name(String courseName);
 }
