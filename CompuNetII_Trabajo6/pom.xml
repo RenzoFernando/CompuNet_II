@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- La raíz de cualquier archivo POM. Contiene la configuración general del proyecto. -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <!-- Versión del modelo de POM que se está utilizando. Para Maven 2 y 3, siempre es 4.0.0. -->
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Define el proyecto padre. En este caso, spring-boot-starter-parent. -->
+    <!-- Este padre proporciona configuraciones por defecto útiles para aplicaciones Spring Boot, -->
+    <!-- como versiones de dependencias y configuraciones de plugins. -->
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.5.5</version>
+        <relativePath/> <!-- Indica que el POM padre debe buscarse en el repositorio, no en una ruta local. -->
+    </parent>
+
+    <!-- Coordenadas únicas que identifican este proyecto. -->
+    <groupId>org.example</groupId>
+    <artifactId>CompuNetII_Trabajo6</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+
+    <!-- El tipo de empaquetado del proyecto. 'war' se utiliza para aplicaciones web que se desplegarán en un servidor de servlets. -->
+    <packaging>war</packaging>
+
+    <!-- Información general sobre el proyecto. -->
+    <name>CompuNetII_Trabajo6</name>
+    <description>CompuNetII_Trabajo6</description>
+    <url/>
+    <licenses>
+        <license/>
+    </licenses>
+    <developers>
+        <developer/>
+    </developers>
+    <scm>
+        <connection/>
+        <developerConnection/>
+        <tag/>
+        <url/>
+    </scm>
+
+    <!-- Propiedades personalizadas que se pueden usar en otras partes del POM. -->
+    <properties>
+        <!-- Define la versión de Java que el proyecto utilizará para compilar el código fuente. -->
+        <java.version>17</java.version>
+    </properties>
+
+    <!-- Contiene la lista de dependencias que el proyecto necesita. -->
+    <dependencies>
+        <!-- Dependencia para usar Thymeleaf como motor de plantillas. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
+        <!-- Dependencia principal para construir aplicaciones web con Spring MVC. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Dependencia para Mockito, un framework de mocking para pruebas unitarias. -->
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope> <!-- 'test' indica que esta dependencia solo es necesaria para compilar y ejecutar pruebas. -->
+        </dependency>
+
+        <!-- Proporciona el contenedor de servlets Tomcat, necesario para ejecutar la aplicación como un WAR. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+            <scope>provided</scope> <!-- 'provided' significa que el contenedor (como un servidor Tomcat externo) proporcionará esta dependencia en tiempo de ejecución. -->
+        </dependency>
+
+        <!-- Dependencia base para las pruebas en Spring Boot. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Dependencia para usar Spring Data JPA para la persistencia de datos. -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <!-- Dependencia para la base de datos en memoria H2. -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope> <!-- 'runtime' significa que la dependencia es necesaria en tiempo de ejecución, pero no en tiempo de compilación. -->
+        </dependency>
+    </dependencies>
+
+    <!-- Define la configuración del proceso de construcción (build) del proyecto. -->
+    <build>
+        <!-- Lista de plugins utilizados durante el proceso de construcción. -->
+        <plugins>
+            <!-- Plugin de Spring Boot para empaquetar la aplicación y hacerla ejecutable. -->
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <!-- Plugin de Maven para compilar el código fuente del proyecto. -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <!-- Configuración específica del plugin. -->
+                <configuration>
+                    <!-- Especifica la versión de Java a la que se debe compilar el código. -->
+                    <release>21</release>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
