@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<!-- Declaración del espacio de nombres de Thymeleaf (th) -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Estudiantes</title>
+    <!-- Enlace al archivo CSS. th:href resuelve la ruta al recurso estático. -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<div class="container">
+    <div><h1>Estudiantes</h1></div>
+
+    <!-- Tarjeta para el Formulario de Agregar Estudiante -->
+    <div class="card">
+        <h2>Agregar Nuevo Estudiante</h2>
+        <!-- Formulario para enviar datos.
+             th:action define la URL a la que se enviará el formulario.
+             method="post" indica que se usará una petición HTTP POST.
+             th:object="${student}" vincula este formulario con el objeto 'student' del modelo. -->
+        <form th:action="@{/students/save}" method="post" th:object="${student}" class="form-container">
+            <div class="form-group">
+                <label for="name">Nombre:</label>
+                <!-- th:field="*{name}" vincula este campo de entrada con el atributo 'name' del objeto 'student'.
+                     Esto se encarga del 'name', 'id' y 'value' del input. -->
+                <input type="text" th:field="*{name}" placeholder="Ej: Sabrina Annlynn" required>
+            </div>
+            <div class="form-group">
+                <label for="code">Código:</label>
+                <!-- Vinculado al atributo 'code' del objeto 'student'. -->
+                <input type="text" th:field="*{code}" placeholder="Ej: A00401681" required>
+            </div>
+            <div class="form-group">
+                <label for="program">Programa:</label>
+                <!-- Vinculado al atributo 'program' del objeto 'student'. -->
+                <input type="text" th:field="*{program}" placeholder="Ej: Ingeniería de mi corazón" required>
+            </div>
+            <button type="submit" class="button">Guardar Estudiante</button>
+        </form>
+    </div>
+
+    <!-- Tarjeta para mostrar la Lista de Estudiantes -->
+    <div class="card">
+        <h2>Lista de Estudiantes</h2>
+        <ul class="student-list">
+            <!-- th:each itera sobre la colección 'studentList' que se pasó desde el controlador.
+                 En cada iteración, el elemento actual se asigna a la variable 's'. -->
+            <li th:each="s : ${studentList}">
+                <div class="student-info">
+                    <!-- Muestra el nombre del estudiante. -->
+                    <strong th:text="${s.name}">Nombre del Estudiante</strong>
+                    <!-- Muestra el código del estudiante. -->
+                    <span class="code" th:text="'Código: ' + ${s.code}">Código</span>
+                </div>
+                <!-- Muestra el programa del estudiante. -->
+                <span class="program" th:text="${s.program}">Programa</span>
+            </li>
+        </ul>
+    </div>
+
+    <div>
+        <!-- Enlace para regresar a la página de inicio. -->
+        <a th:href="@{/}" class="button">Volver al Inicio</a>
+    </div>
+</div>
+
+<!-- Enlace al archivo JavaScript. -->
+<script defer th:src="@{/js/script.js}"></script>
+</body>
+</html>

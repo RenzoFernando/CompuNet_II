@@ -1,6 +1,7 @@
 package co.edu.icesi.CompuNetII_Trabajo5.service.impl;
 
 import co.edu.icesi.CompuNetII_Trabajo5.entity.Student;
+import co.edu.icesi.CompuNetII_Trabajo5.repository.IProfessorRepository;
 import co.edu.icesi.CompuNetII_Trabajo5.repository.IStudentRepository;
 import co.edu.icesi.CompuNetII_Trabajo5.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,10 @@ public class StudentServiceImpl implements IStudentService {
     // La capa de servicio USA el repositorio para acceder a los datos.
     @Autowired
     private IStudentRepository studentRepository;
+    @Autowired
+    private ProfessorServiceImpl professorServiceImpl;
+    @Autowired
+    private IProfessorRepository iProfessorRepository;
 
     // --- IMPLEMENTACIÓN DE LOS MÉTODOS DEL CONTRATO ---
 
@@ -56,7 +61,10 @@ public class StudentServiceImpl implements IStudentService {
 
     @Override
     public List<Student> getStudentsByCourseName(String name) {
-        return studentRepository.findByStudentCourses_Course_Name(name);
+        if (iProfessorRepository.findByCourses_Name(name).isPresent()) {
+            return studentRepository.findByStudentCourses_Course_Name(name);
+        }
+        throw new RuntimeException("Students with course name " + name + " not found");
     }
 
 }

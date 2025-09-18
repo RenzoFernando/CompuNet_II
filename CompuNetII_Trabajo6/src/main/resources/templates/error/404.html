@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página No Encontrada</title>
+    <!-- Enlace al archivo CSS para mantener la consistencia del estilo. -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        /* Estilos adicionales específicos para la página 404 */
+        .error-container {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .error-container h1 {
+            font-size: 6rem;
+            margin-bottom: 0;
+            color: var(--primary-hover);
+        }
+        .error-container p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="card error-container">
+        <h1>404</h1>
+        <h2>Página No Encontrada</h2>
+        <p>Lo sentimos, la página que buscas no existe o ha sido movida.</p>
+        <!-- Botón para regresar a la página de inicio. -->
+        <a th:href="@{/}" class="button">Volver al Inicio</a>
+    </div>
+</div>
+
+<!-- Enlace al archivo JavaScript. -->
+<script defer th:src="@{/js/script.js}"></script>
+</body>
+</html>

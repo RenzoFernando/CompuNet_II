@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<!-- Declaración del espacio de nombres de Thymeleaf (th) -->
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Página de Inicio</title>
+    <!-- Enlace al archivo CSS. th:href se usa para resolver la ruta al archivo de estilo correctamente. -->
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div class="container">
+    <div class="card">
+        <!-- th:text reemplaza el contenido de la etiqueta h1 con el valor del atributo 'message' del modelo. -->
+        <!-- Si 'message' no existe, se mostrará el texto por defecto "Bienvenido a la Aplicación". -->
+        <h1 th:text="${message}">Bienvenido a la Aplicación</h1>
+        <p>Este es el punto de partida de tu proyecto. Desde aquí puedes navegar a las diferentes secciones.</p>
+        <!-- Enlace para navegar a la página de gestión de estudiantes. -->
+        <!-- th:href asegura que la URL se genere correctamente, independientemente del contexto de la aplicación. -->
+        <a th:href="@{/students}" class="button">Gestionar Estudiantes</a>
+    </div>
+</div>
+
+<!-- Enlace al archivo JavaScript. 'defer' asegura que el script se ejecute después de que el HTML ha sido analizado. -->
+<script defer th:src="@{/js/script.js}"></script>
+</body>
+</html>
